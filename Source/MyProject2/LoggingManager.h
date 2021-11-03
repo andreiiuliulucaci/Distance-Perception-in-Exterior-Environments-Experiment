@@ -4,6 +4,8 @@
 
 #include "CSV.h"
 #include "TimerManager.h"
+#include "GameFramework/Pawn.h"
+#include "GameFramework/Character.h"
 #include "GameFramework/Actor.h"
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
@@ -30,7 +32,9 @@ public:
 		//bool bUpdateEveryFrame;
 
 	UPROPERTY(EditAnywhere, Category = "LoggingManager")
-	AActor* Player;
+	ACharacter* Player;
+	UPROPERTY(EditAnywhere, Category = "LoggingManager")
+	APawn* TargetPawn;
 
 	UPROPERTY(EditAnywhere, Category = "LoggingManager")
 	float LoggingStartTime; // Time at Logging Start

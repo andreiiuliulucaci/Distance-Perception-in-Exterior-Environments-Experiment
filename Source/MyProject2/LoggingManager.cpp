@@ -50,8 +50,8 @@ void ULoggingManager::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 void ULoggingManager::LogData()
 {
 	float Time = GetWorld()->GetTimeSeconds();
-	FVector PlayerLocation = GetOwner()->GetActorLocation();
-	FRotator PlayerRotation = GetOwner()->GetActorRotation();
+	FVector PlayerLocation = Player->GetActorLocation();
+	FRotator PlayerRotation = Player->GetActorRotation();
 	FVector ObjectLocation; // The Location of Object that the Player looks at.
 	FString ObjectName;
 	GetViewDirection(&ObjectLocation, &ObjectName);
