@@ -49,7 +49,7 @@ void CSV::WriteCSVFile(string Filename, string Path)
 {
 	ofstream File;
 	File.open(Path + "CSV_Files/" + Filename + ".csv");
-	File << "X;Y;Z;Pitch;Yaw;Roll;ObjectX;ObjectY;ObjectZ;ObjectName;Time" << endl;
+	File << "X;Y;Z;Pitch;Yaw;Roll;Time" << endl;
 	for (string Row : Data)
 	{
 		File << Row << endl;

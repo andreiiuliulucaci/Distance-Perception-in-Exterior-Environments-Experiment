@@ -23,18 +23,15 @@ private:
 public:
 
 	UPROPERTY(EditAnywhere, Category = "LoggingManager")
-		FString Filename;
+	FString Filename;
 
 	UPROPERTY(EditAnywhere, Category = "LoggingManager")
 	FString Path; // Always starts at project Path
 
-		//UPROPERTY(EditAnywhere, Category = "LoggingManager")
-		//bool bUpdateEveryFrame;
-
-	UPROPERTY(EditAnywhere, Category = "LoggingManager")
-	ACharacter* Player;
-	UPROPERTY(EditAnywhere, Category = "LoggingManager")
 	APawn* TargetPawn;
+	FVector PawnLocation;
+	FRotator PawnRotation;
+	USceneComponent* PawnCameraComponent;
 
 	UPROPERTY(EditAnywhere, Category = "LoggingManager")
 	float LoggingStartTime; // Time at Logging Start

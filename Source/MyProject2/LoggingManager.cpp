@@ -4,6 +4,7 @@
 #include<string>
 #include<vector>
 #include"TimerManager.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
 ULoggingManager::ULoggingManager()
@@ -14,7 +15,6 @@ ULoggingManager::ULoggingManager()
 
 	// Assign Instance Variables Default Values
 
-	//bUpdateEveryFrame = false;
 	LoggingStartTime = 0.0f;
 	LoggingTimeInterval = 1.f;
 	LoggingStopTime = 10.f;
@@ -36,6 +36,8 @@ void ULoggingManager::BeginPlay()
 	Path = FPaths::ProjectDir();
 	UE_LOG(LogTemp, Warning, TEXT("Logging Begin"));
 	GetWorld()->GetTimerManager().SetTimer(Handle, this, &ULoggingManager::LogData, LoggingTimeInterval, true, LoggingStartTime);
+	TargetPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+	
 }
 
 
@@ -50,22 +52,23 @@ void ULoggingManager::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 void ULoggingManager::LogData()
 {
 	float Time = GetWorld()->GetTimeSeconds();
-	FVector PlayerLocation = Player->GetActorLocation();
-	FRotator PlayerRotation = Player->GetActorRotation();
-	FVector ObjectLocation; // The Location of Object that the Player looks at.
-	FString ObjectName;
-	GetViewDirection(&ObjectLocation, &ObjectName);
+	//FVector PlayerLocation = Player->GetActorLocation();
+	//FRotator PlayerRotation = Player->GetActorRotation();
+	PawnLocation = TargetPawn->GetActorLocation();
+	PawnRotation = TargetPawn->GetActorRotation();
+	//FVector ObjectLocation; // The Location of Object that the Player looks at.
+	//FString ObjectName;
+	//GetViewDirection(&ObjectLocation, &ObjectName);
 
 	// Converts all floating point values to single string
 	string Values = Csv.CSVFormat(vector<float> {
-		PlayerLocation.X, PlayerLocation.Y, PlayerLocation.Z, // Player Location
-			PlayerRotation.Pitch, PlayerRotation.Yaw, PlayerRotation.Roll, // Player Rotation
-			ObjectLocation.X, ObjectLocation.Y, ObjectLocation.Z, // Object Location
+		PawnLocation.X, PawnLocation.Y, PawnLocation.Z, // Player Location
+			PawnRotation.Pitch, PawnRotation.Yaw, PawnRotation.Roll, // Player Rotation
 			Time // Instance Time
 	});
 
-	Values += string(TCHAR_TO_UTF8(*ObjectName)) + ";"; // Add Object Name as the element and it is converted to a string.
-	FString SomeString(Values.c_str());
+	//Values += string(TCHAR_TO_UTF8(*ObjectName)) + ";"; // Add Object Name as the element and it is converted to a string.
+	//FString SomeString(Values.c_str());
 	Csv.AddRow(Values);
 
 	if (Time - LoggingStartTime >= LoggingStopTime)
@@ -80,8 +83,8 @@ void ULoggingManager::LogData()
 void ULoggingManager::GetViewDirection(FVector* Point, FString* Name)
 {
 	FHitResult OutHit;
-	FVector Start = Player->GetActorLocation();
-	FVector End = Start + Player->GetActorForwardVector() * LookingDistance;
+	FVector Start = TargetPawn->GetActorLocation();
+	FVector End = Start + TargetPawn->GetActorForwardVector() * LookingDistance;
 
 	if (GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, ECollisionChannel::ECC_Visibility))
 	{
