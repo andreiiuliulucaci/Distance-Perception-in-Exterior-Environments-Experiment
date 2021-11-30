@@ -22,7 +22,7 @@ public:
 		FString FriendlyRecordingName;
 
 	UFUNCTION(BlueprintCallable, Category = "Replays")
-		void StartRecording(int IDTracker);
+		void StartRecording(int IDTracker); //TestComment
 
 	UFUNCTION(BlueprintCallable, Category = "Replays")
 		void StopRecording();

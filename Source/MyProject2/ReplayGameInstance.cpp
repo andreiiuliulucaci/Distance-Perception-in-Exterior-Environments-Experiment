@@ -10,7 +10,7 @@ UReplayGameInstance::UReplayGameInstance()
 	FriendlyRecordingName = "ID Replay"; //+ IntAsString;
 }
 
-void UReplayGameInstance::StartRecording(int IDTracker)
+void UReplayGameInstance::StartRecording(int IDTracker)//testcomment
 {
 	IDTracker += 1;
 	FString IntAsString = FString::FromInt(IDTracker);
