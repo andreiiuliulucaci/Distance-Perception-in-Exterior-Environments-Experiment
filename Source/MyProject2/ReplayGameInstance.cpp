@@ -5,12 +5,12 @@
 
 UReplayGameInstance::UReplayGameInstance()
 {
-	FString IntAsString = FString::FromInt(IDTracker);
-	RecordingName = "IDReplay " + IntAsString;
-	FriendlyRecordingName = "ID Replay" + IntAsString;
+	//FString IntAsString = FString::FromInt(IDTracker);
+	RecordingName = "IDReplay "; //+ IntAsString;
+	FriendlyRecordingName = "ID Replay"; //+ IntAsString;
 }
 
-void UReplayGameInstance::StartRecording()
+void UReplayGameInstance::StartRecording(int IDTracker)
 {
 	IDTracker += 1;
 	FString IntAsString = FString::FromInt(IDTracker);

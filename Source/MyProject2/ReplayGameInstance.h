@@ -15,7 +15,6 @@ class MYPROJECT2_API UReplayGameInstance : public UGameInstance
 	GENERATED_BODY()
 public:
 	UReplayGameInstance();
-	int IDTracker = 0;
 	UPROPERTY(EditDefaultsOnly, Category = "Replays")
 		FString RecordingName;
 
@@ -23,7 +22,7 @@ public:
 		FString FriendlyRecordingName;
 
 	UFUNCTION(BlueprintCallable, Category = "Replays")
-		void StartRecording();
+		void StartRecording(int IDTracker);
 
 	UFUNCTION(BlueprintCallable, Category = "Replays")
 		void StopRecording();
